@@ -2,8 +2,6 @@
 
 ## Common components for guitar playing
 
-### Fork to create your own or contribute
-
 MIT License
 
 [Read the full documentation](https://svelte-guitar.robino.dev)
