@@ -1,4 +1,4 @@
-import Chord from "$lib/Chord.svelte";
+import Chord from "$lib/components/Chord.svelte";
 import type { Info, Component } from "@rossrobino/components";
 
 export const info: Info = {

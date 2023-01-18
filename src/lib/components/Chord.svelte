@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { colorLight } from "$lib/utilities/colorLight";
+	import { colorLight } from "../utilities/colorLight";
 	import { onMount } from "svelte";
 
 	/** svg class */
