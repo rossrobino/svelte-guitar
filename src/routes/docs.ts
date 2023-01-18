@@ -22,7 +22,7 @@ export const componentList: Component[] = [
 				name: "size",
 				purpose: "Size in pixels",
 				type: "number",
-				default: "",
+				default: "200",
 			},
 			{
 				name: "strings",
