@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { colorLight } from "../utilities/colorLight";
 	import { onMount } from "svelte";
+	import { get } from "svelte/store";
 
 	/** svg class */
 	let className: string = "";
@@ -111,6 +112,7 @@
 		if (colorLight(currentColor)) {
 			noteTextColor = "#000";
 		}
+		console.log(small);
 	});
 
 	/**
@@ -147,6 +149,18 @@
 			(boxSize / fretRange) * fret + offset / 2 - boxSize / fretRange / 2
 		);
 	};
+
+	const getNumberColor = (fret: number) => {
+		if (small) {
+			return "currentColor"
+		} else {
+			if (fret === 0) {
+				return "currentColor";
+			} else {
+				return noteTextColor;
+			}
+		}
+	}
 </script>
 
 {#if notes.length}
@@ -220,12 +234,10 @@
 						: noteY(note.fret, small) +
 						  circleRadius / 2.7 +
 						  (small ? 0 : circleRadius / 20)}
-					color={small
-						? "currentColor"
-						: note.fret === 0
-						? "currentColor"
-						: noteTextColor}
+					color={getNumberColor(note.fret)}
+					fill={getNumberColor(note.fret)}
 					font-size={small ? circleRadius * 1.5 : circleRadius * 1.2}
+					style="font-weight: 600;"
 				>
 					{note.finger}
 				</text>

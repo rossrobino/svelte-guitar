@@ -68,7 +68,7 @@
 		<h3>Props</h3>
 		<div class="mt-2">
 			<h4><label for="qSize">size</label></h4>
-			<div class="grid grid-cols-2 gap-2">
+			<div class="grid grid-cols-2 gap-4">
 				<select
 					name="qSize"
 					id="qSize"
@@ -86,31 +86,34 @@
 				/>
 			</div>
 		</div>
-		<div>
-			<h4><label for="name">name</label></h4>
-			<input
-				id="name"
-				type="text"
-				bind:value={props.name}
-				maxlength="10"
-			/>
+		<div class="grid grid-cols-2 gap-4">
+			<div>
+				<h4><label for="name">name</label></h4>
+				<input
+					id="name"
+					type="text"
+					bind:value={props.name}
+					maxlength="10"
+				/>
+			</div>
+			<div>
+				<h4><label for="strings">strings</label></h4>
+				<input
+					id="strings"
+					type="number"
+					bind:value={props.strings}
+					min="3"
+					max="15"
+				/>
+			</div>
 		</div>
-		<div>
-			<h4><label for="strings">strings</label></h4>
-			<input
-				id="strings"
-				type="number"
-				bind:value={props.strings}
-				min="3"
-				max="15"
-			/>
-		</div>
+
 		<div>
 			<h4>notes</h4>
 			{#each props.notes as note, i}
 				<div>
 					<h5>notes[{i}]</h5>
-					<div class="grid grid-cols-3 gap-2">
+					<div class="grid grid-cols-3 gap-4">
 						<div>
 							<label for="finger{i}">finger</label>
 							<input
@@ -162,7 +165,7 @@
 			type="color"
 			name="color"
 			id="color"
-			class="h-10"
+			class="rounded-none"
 			bind:value={props.color}
 		/>
 	</div>
