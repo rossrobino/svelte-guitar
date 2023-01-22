@@ -1,5 +1,7 @@
 <script>
 	import "../app.postcss";
+	import { info } from "./docs";
+	import { Header, Footer } from "@rossrobino/components";
 </script>
 
 <svelte:head>
@@ -12,4 +14,15 @@
 	<meta name="theme-color" content="#18181b" />
 </svelte:head>
 
-<slot />
+<Header {info}>
+	<li><a href="/">Create</a></li>
+	<li class="ml-4"><a href="/docs">Docs</a></li>
+</Header>
+
+<main class="md:mx-4 flex justify-center">
+	<div class="basis-full md:basis-[768px]">
+		<slot />
+	</div>
+</main>
+
+<Footer {info} />

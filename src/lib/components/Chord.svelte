@@ -25,9 +25,6 @@
 	/** line width */
 	const strokeWidth: number = size / 60;
 
-	/** background color */
-	export let bgColor: string = "transparent";
-
 	/** total number of strings for the instrument */
 	export let strings: number = 6;
 
@@ -52,9 +49,10 @@
 	export let notes: Note[] = [];
 
 	/** deep copy of notes to edit -- necessary when high frets are used */
-	let notesList: Note[] = JSON.parse(JSON.stringify(notes));
+	let notesList: Note[] = structuredClone(notes);
 
 	const usedStrings: number[] = notesList.map((note) => note.string);
+
 	for (let i = 1; i < strings + 1; i++) {
 		if (!usedStrings.includes(i)) {
 			notesList.push({
@@ -86,9 +84,11 @@
 	/** first (upper most) fret on the chord chart */
 	let firstFret: number = lowFret;
 
-	if (firstFret < 4) {
+	if (firstFret < 4 && highFret < 5) {
 		firstFret = 1; // default to 1
-		if (lowFret !== 0) fretRange += lowFret - 1;
+		if (lowFret !== 0 ) fretRange += lowFret - 1;
+		if (lowFret === 2 && highFret < 5) fretRange -= 1 ;
+		if (lowFret === 3 && highFret < 5) fretRange -= 2 ;
 	} else {
 		notesList.forEach((note) => {
 			if (note.fret !== 0) {
@@ -103,14 +103,14 @@
 	/** entire svg element */
 	let svg: SVGSVGElement;
 
-	let noteTextColor: string = "#FFF"
+	let noteTextColor: string = "#FFF";
 
 	onMount(async () => {
 		let styles = window.getComputedStyle(svg);
 		let currentColor = styles.getPropertyValue("color");
 		if (colorLight(currentColor)) {
 			noteTextColor = "#000";
-		};
+		}
 	});
 
 	/**
@@ -165,7 +165,7 @@
 		<rect
 			width={boxSize}
 			height={boxSize}
-			fill={bgColor}
+			fill="transparent"
 			x={offset}
 			y={offset / 2}
 			stroke="currentColor"
@@ -215,9 +215,11 @@
 				<!-- RECOMMENDED FINGER -->
 				<text
 					x={noteX(note.string) - circleRadius / 2.7}
-					y={noteY(note.fret, small) +
-						circleRadius / 2.7 +
-						(small ? 0 : circleRadius / 20)}
+					y={note.fret === 0
+						? offset / 2 - strokeWidth * 2.4
+						: noteY(note.fret, small) +
+						  circleRadius / 2.7 +
+						  (small ? 0 : circleRadius / 20)}
 					color={small
 						? "currentColor"
 						: note.fret === 0
@@ -240,7 +242,7 @@
 		</text>
 
 		<!-- STARTING FRET -->
-		{#if firstFret > 3}
+		{#if firstFret > 1}
 			<text
 				x={size - offset / 1.8}
 				y={offset / 2 + boxSize / 7}

@@ -53,6 +53,6 @@ export const componentList: Component[] = [
 			name: "D",
 			class: "text-indigo-700",
 		},
-		references: [],
+		references: [{ name: "demo", href: "/demo#chord" }],
 	},
 ];

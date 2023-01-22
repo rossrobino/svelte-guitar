@@ -8,10 +8,10 @@
 		@apply scroll-smooth selection:bg-yellow-300 selection:text-zinc-900;
 	}
 	body {
-		@apply bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-200;
+		@apply bg-zinc-50 text-zinc-900;
 	}
 	section {
-		@apply bg-zinc-100 dark:bg-zinc-800 p-4 mb-4 last:mb-0;
+		@apply bg-zinc-100 p-4 mb-4 last:mb-0;
 	}
 	h1,
 	h2,
@@ -22,7 +22,7 @@
 		@apply font-bold;
 	}
 	h1 {
-		@apply text-3xl my-4;
+		@apply text-3xl m-4 md:mx-0;
 	}
 	h2 {
 		@apply text-2xl;
@@ -43,13 +43,13 @@
 		@apply underline underline-offset-2 font-bold decoration-blue-500;
 	}
 	table {
-		@apply w-full border border-zinc-300 dark:border-zinc-700 mt-3;
+		@apply w-full border border-zinc-300 mt-3;
 	}
 	thead {
-		@apply bg-zinc-300 dark:bg-zinc-700;
+		@apply bg-zinc-300;
 	}
 	tr {
-		@apply border-b border-zinc-300  dark:border-zinc-700;
+		@apply border-b border-zinc-300;
 	}
 	th,
 	td {
@@ -66,19 +66,14 @@
 	li {
 		@apply ml-6;
 	}
-	hr {
-		@apply border border-zinc-500;
+	input,
+	select {
+		@apply border border-zinc-900 mb-2 w-full px-1.5 h-7 bg-zinc-50;
 	}
-	code {
-		@apply bg-zinc-300 dark:bg-zinc-700 px-1 py-0.5;
+	label {
+		@apply block;
 	}
-	.codeblock code {
-		@apply bg-transparent p-0;
-	}
-}
-
-@layer components {
-	.codeblock {
-		@apply my-2 bg-zinc-900 text-zinc-50 p-4 overflow-x-auto text-sm;
+	button {
+		@apply bg-zinc-700 text-zinc-50 p-2 hover:brightness-90;
 	}
 }
