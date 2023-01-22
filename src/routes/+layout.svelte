@@ -15,7 +15,7 @@
 </svelte:head>
 
 <Header {info}>
-	<li><a href="/">Create</a></li>
+	<li class="ml-0"><a href="/">Create</a></li>
 	<li class="ml-4"><a href="/docs">Docs</a></li>
 </Header>
 
