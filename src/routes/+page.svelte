@@ -1,20 +1,17 @@
 <script lang="ts">
-	import ChordDemo from "./ChordDemo.svelte";
-	import { info } from "./docs";
+	import { Docs } from "@rossrobino/components";
+	import { info, componentList } from "./docs";
 </script>
 
 <svelte:head>
-	<title>{info.packageName} - Create</title>
-	<meta name="description" content="Create svelte-guitar components." />
+	<title>{info.packageName}</title>
+	<meta name="description" content="Common components for guitar playing" />
 	<meta
 		name="keywords"
-		content="Ross, Robino, guitar, chord, Svelte, components, demo"
+		content="Ross, Robino, guitar, chord, Svelte, components"
 	/>
 </svelte:head>
 
-<h1>Create</h1>
+<h1>Documentation</h1>
 
-<section>
-	<h2 id=#chord>Chord</h2>
-	<ChordDemo />
-</section>
+<Docs {info} {componentList} />

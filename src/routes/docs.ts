@@ -14,7 +14,8 @@ export const componentList: Component[] = [
 	{
 		component: Chord,
 		name: "Chord",
-		purpose: "Generates an svg of a guitar chord. Style with the css 'color' attribute.",
+		purpose:
+			"Generates an svg of a guitar chord. Style with the css 'color' attribute.",
 		props: [
 			{ name: "class", purpose: "class", type: "string", default: "" },
 			{ name: "id", purpose: "id", type: "string", default: "" },
@@ -23,6 +24,12 @@ export const componentList: Component[] = [
 				purpose: "Size in pixels",
 				type: "number",
 				default: "200",
+			},
+			{
+				name: "name",
+				purpose: "Name of the chord",
+				type: "string",
+				default: "",
 			},
 			{
 				name: "strings",
@@ -36,23 +43,16 @@ export const componentList: Component[] = [
 				type: "Array of note objects",
 				default: "[]",
 			},
-			{
-				name: "name",
-				purpose: "Name of the chord",
-				type: "string",
-				default: "",
-			},
 		],
 		example: {
+			name: "D",
 			notes: [
 				{ finger: 0, string: 4, fret: 0 },
 				{ finger: 1, string: 3, fret: 2 },
 				{ finger: 2, string: 1, fret: 2 },
 				{ finger: 3, string: 2, fret: 3 },
 			],
-			name: "D",
-			class: "text-indigo-700",
 		},
-		references: [{ name: "demo", href: "/demo#chord" }],
+		references: [{ name: "Create a chord", href: "/create" }],
 	},
 ];

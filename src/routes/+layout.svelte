@@ -15,8 +15,8 @@
 </svelte:head>
 
 <Header {info}>
-	<li class="ml-0"><a href="/">Create</a></li>
-	<li class="ml-4"><a href="/docs">Docs</a></li>
+	<li class="ml-0"><a href="/">Docs</a></li>
+	<li class="ml-4"><a href="/create">Create</a></li>
 </Header>
 
 <main class="md:mx-4 flex justify-center">

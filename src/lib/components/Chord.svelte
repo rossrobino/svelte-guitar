@@ -1,8 +1,4 @@
 <script lang="ts">
-	import { colorLight } from "../utilities/colorLight";
-	import { onMount } from "svelte";
-	import { get } from "svelte/store";
-
 	/** svg class */
 	let className: string = "";
 
@@ -11,14 +7,17 @@
 
 	export { className as class, idName as id };
 
+	/** total number of strings for the instrument */
+	export let strings: number = 6;
+
+	/** name of chord */
+	export let name: string = "";
+
 	/** total size of chord square */
 	export let size: number = 200;
 
 	/** size of inner box */
 	const boxSize: number = size * 0.61;
-
-	/** adjust content based on size of chart */
-	const small: boolean = boxSize < 120 ? true : false;
 
 	/** offset the inner box */
 	const offset: number = (size - boxSize) / 2;
@@ -26,14 +25,8 @@
 	/** line width */
 	const strokeWidth: number = size / 60;
 
-	/** total number of strings for the instrument */
-	export let strings: number = 6;
-
 	/** list of strings to calculate positioning */
 	const stringList: number[] = Array.from(Array(strings).keys());
-
-	/** name of chord */
-	export let name: string = "";
 
 	interface Note {
 		/** recommended finger to use */
@@ -52,8 +45,10 @@
 	/** deep copy of notes to edit -- necessary when high frets are used */
 	let notesList: Note[] = structuredClone(notes);
 
+	/** used to determine if unused need to be added */
 	const usedStrings: number[] = notesList.map((note) => note.string);
 
+	// add missing missing strings
 	for (let i = 1; i < strings + 1; i++) {
 		if (!usedStrings.includes(i)) {
 			notesList.push({
@@ -87,9 +82,9 @@
 
 	if (firstFret < 4 && highFret < 5) {
 		firstFret = 1; // default to 1
-		if (lowFret !== 0 ) fretRange += lowFret - 1;
-		if (lowFret === 2 && highFret < 5) fretRange -= 1 ;
-		if (lowFret === 3 && highFret < 5) fretRange -= 2 ;
+		if (lowFret !== 0) fretRange += lowFret - 1;
+		if (lowFret === 2 && highFret < 5) fretRange -= 1;
+		if (lowFret === 3 && highFret < 5) fretRange -= 2;
 	} else {
 		notesList.forEach((note) => {
 			if (note.fret !== 0) {
@@ -100,20 +95,6 @@
 
 	/** how large each note circle is */
 	const circleRadius: number = boxSize / fretRange / 2.3;
-
-	/** entire svg element */
-	let svg: SVGSVGElement;
-
-	let noteTextColor: string = "#FFF";
-
-	onMount(async () => {
-		let styles = window.getComputedStyle(svg);
-		let currentColor = styles.getPropertyValue("color");
-		if (colorLight(currentColor)) {
-			noteTextColor = "#000";
-		}
-		console.log(small);
-	});
 
 	/**
 	 * calculates X position based on the string number
@@ -143,29 +124,15 @@
 	 * calculates Y position based on the fret number
 	 * @param fret - fret number
 	 */
-	const noteY = (fret: number, small: boolean = false): number => {
-		if (small && fret !== 0) fret = fretRange + 1;
+	const noteY = (fret: number): number => {
 		return (
 			(boxSize / fretRange) * fret + offset / 2 - boxSize / fretRange / 2
 		);
 	};
-
-	const getNumberColor = (fret: number) => {
-		if (small) {
-			return "currentColor"
-		} else {
-			if (fret === 0) {
-				return "currentColor";
-			} else {
-				return noteTextColor;
-			}
-		}
-	}
 </script>
 
 {#if notes.length}
 	<svg
-		bind:this={svg}
 		width={size}
 		height={size}
 		stroke="currentColor"
@@ -182,7 +149,6 @@
 			fill="transparent"
 			x={offset}
 			y={offset / 2}
-			stroke="currentColor"
 			stroke-width={strokeWidth}
 		/>
 		<line
@@ -228,16 +194,13 @@
 			{#if note.finger !== 0}
 				<!-- RECOMMENDED FINGER -->
 				<text
-					x={noteX(note.string) - circleRadius / 2.7}
+					x={noteX(note.string) - size / 50}
 					y={note.fret === 0
 						? offset / 2 - strokeWidth * 2.4
-						: noteY(note.fret, small) +
-						  circleRadius / 2.7 +
-						  (small ? 0 : circleRadius / 20)}
-					color={getNumberColor(note.fret)}
-					fill={getNumberColor(note.fret)}
-					font-size={small ? circleRadius * 1.5 : circleRadius * 1.2}
-					style="font-weight: 600;"
+						: size - offset * 1.1}
+					color="currentColor"
+					fill="currentColor"
+					font-size={size / 13}
 				>
 					{note.finger}
 				</text>
@@ -247,8 +210,9 @@
 		<!-- CHORD NAME -->
 		<text
 			x={offset}
-			y={small ? size - offset / 2.5 : size - offset / 2}
+			y={size - offset / 2.5}
 			font-size={boxSize / 6}
+			font-weight="600"
 		>
 			{name}
 		</text>
@@ -258,7 +222,7 @@
 			<text
 				x={size - offset / 1.8}
 				y={offset / 2 + boxSize / 7}
-				font-size={circleRadius * 1.5}
+				font-size={size / 13}
 			>
 				{firstFret}f
 			</text>

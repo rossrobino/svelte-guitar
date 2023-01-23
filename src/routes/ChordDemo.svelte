@@ -2,7 +2,7 @@
 	import Chord from "$lib/components/Chord.svelte";
 
 	let props = {
-		size: 300,
+		size: 250,
 		strings: 6,
 		name: "D",
 		notes: [
@@ -61,10 +61,6 @@
 
 <div class="mt-4 grid md:grid-cols-2 gap-6">
 	<div>
-		<button on:click={copyCode} class="w-full">
-			{copied ? "Copied" : "Copy code"}
-		</button>
-
 		<h3>Props</h3>
 		<div class="mt-2">
 			<h4><label for="qSize">size</label></h4>
@@ -182,5 +178,8 @@
 				</div>
 			{/key}
 		</div>
+		<button on:click={copyCode} class="w-2/3 self-center">
+			{copied ? "Copied" : "Copy code"}
+		</button>
 	</div>
 </div>
