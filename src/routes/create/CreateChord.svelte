@@ -23,9 +23,9 @@
 
 	const addNote = () => {
 		props.notes.push({
-			finger: 0,
-			string: 6,
-			fret: 0,
+			finger: 1,
+			string: 1,
+			fret: 1,
 		});
 		props = props;
 	};

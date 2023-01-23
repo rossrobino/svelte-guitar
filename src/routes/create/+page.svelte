@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ChordDemo from "../ChordDemo.svelte";
+	import CreateChord from "./CreateChord.svelte";
 	import { info } from "../docs";
 </script>
 
@@ -15,6 +15,6 @@
 <h1>Create</h1>
 
 <section>
-	<h2 id=#chord>Chord</h2>
-	<ChordDemo />
+	<h2 id="#chord">Chord</h2>
+	<CreateChord />
 </section>
